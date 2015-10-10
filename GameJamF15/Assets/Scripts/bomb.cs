@@ -39,6 +39,15 @@ public class bomb : MonoBehaviour {
 		}
 	}
 
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.gameObject.tag == "PushAttack") {
+			force = force * -4;
+		}
+		if (other.gameObject.tag == "LiftAttack") {
+			force = force * -4;
+		}
+	}
+
 	void Explode() {
 		GameObject g = (GameObject) Instantiate (Resources.Load ("preExplosion"), new Vector3(transform.position.x, transform.position.y, -5), Quaternion.identity);
 		Destroy (gameObject);
