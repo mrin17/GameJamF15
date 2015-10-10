@@ -15,15 +15,17 @@ public class bomb : MonoBehaviour {
 		else if ((Vector2) transform.position == new Vector2(bombSpawner.SPAWN_X_RIGHT, bombSpawner.SPAWN_Y_BOMB))
 			force = new Vector2(-INITIAL_VELOCITY, 0);
 		else if ((Vector2) transform.position == new Vector2(bombSpawner.SPAWN_X_LEFT, bombSpawner.SPAWN_Y_GRENADE))
-			force = new Vector2(INITIAL_VELOCITY*3, 0);
+			force = new Vector2(INITIAL_VELOCITY*5, 0);
 		else if ((Vector2) transform.position == new Vector2(bombSpawner.SPAWN_X_RIGHT, bombSpawner.SPAWN_Y_GRENADE))
-			force = new Vector2(-INITIAL_VELOCITY*3, 0);
+			force = new Vector2(-INITIAL_VELOCITY*5, 0);
 		direction = force.x;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		transform.Translate (force);
+		if (transform.position.x < bombSpawner.SPAWN_X_LEFT || transform.position.x > bombSpawner.SPAWN_X_RIGHT)
+			Destroy (gameObject);
 	}
 
 	//different types of collisions

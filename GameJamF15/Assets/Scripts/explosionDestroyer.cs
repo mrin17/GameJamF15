@@ -5,6 +5,7 @@ using System.Collections;
 
 //Mike
 //this waits for the explosion to be finished until destroying it
+//also it destroys the collision box halfway through
 public class explosionDestroyer : MonoBehaviour {
 
 	ParticleSystem ps;
