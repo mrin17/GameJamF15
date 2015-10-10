@@ -28,7 +28,10 @@ public class CubeControl : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D col)
 	{
 		if (col.gameObject.name.Equals ("Block")) {
-		 col.gameObject.rigidbody2D.AddForce (new Vector2 (0, 5));
+			for(float x = 0; x < 1; x += .1f)
+			{
+				col.gameObject.transform.Translate (new Vector3 (-x, x, 0));
+			}
 		}
 	}
 }
