@@ -7,6 +7,7 @@ public class scrCameraShake : MonoBehaviour {
 	float shakeTimer = 0;
 	float initialZ;
 	Vector3 offset = new Vector3(0, 0, 0);
+	const float SHAKE_RATE = 1;
 
 	// Use this for initialization
 	void Start () {
@@ -18,7 +19,7 @@ public class scrCameraShake : MonoBehaviour {
 		if (shakeTimer > 0) {
 			shakeTimer -= Time.deltaTime;
 			transform.position = offset +
-				new Vector3(Random.Range (-shakeTimer, shakeTimer), Random.Range (-shakeTimer, shakeTimer), 0);
+				new Vector3(Random.Range (-shakeTimer*SHAKE_RATE, shakeTimer*SHAKE_RATE), Random.Range (-shakeTimer*SHAKE_RATE, shakeTimer*SHAKE_RATE), 0);
 		}
 		else if (shakeTimer < 0) {
 			shakeTimer = 0;
