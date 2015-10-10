@@ -14,6 +14,7 @@ public class explosionDestroyer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		ps = GetComponent<ParticleSystem> ();
+		FindObjectOfType<scrCameraShake> ().Shake (.125f);
 
 	}
 	
