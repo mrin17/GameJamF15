@@ -14,6 +14,9 @@ public class playerAttack : MonoBehaviour {
 
 	GameObject attack;
 
+	public const float MAX_HEALTH = 5;
+	float health = MAX_HEALTH;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -60,5 +63,15 @@ public class playerAttack : MonoBehaviour {
 
 	public bool isAttacking() {
 		return attack != null;
+	}
+
+	public void takeDamage() {
+		health--;
+		FindObjectOfType<scrCameraShake> ().Shake (.5f);
+		FindObjectOfType<heartController> ().removeHeart ();
+	}
+
+	public float getHealth() { 
+		return health; 
 	}
 }
