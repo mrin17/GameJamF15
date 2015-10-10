@@ -7,13 +7,19 @@ public class bombSpawner : MonoBehaviour {
 
 
 	public const float SPAWN_X_LEFT = -13;
-	public const float SPAWN_Y_BOMB = -3.5f;
-	public const float SPAWN_Y_GRENADE = -1f;
 	public const float SPAWN_X_RIGHT = 13;
+	public const float SPAWN_X_LEFT_PARA = -3;
+	public const float SPAWN_X_RIGHT_PARA = 3;
+
+	public const float SPAWN_Y_BOMB = -3.85f;
+	public const float SPAWN_Y_GRENADE = -1f;
+	public const float SPAWN_Y_PARACHUTE = 5f;
 
 	const float BETWEEN_BOMB_MAX = .5f;
 	float betweenBombTimer = 0;
 	const int RATIO = 100;
+	int bounceRatio = 4;
+	int parachuteRatio = 4;
 
 	List<GameObject> bombs = new List<GameObject> ();
 	List<GameObject> grenades = new List<GameObject> ();
@@ -38,7 +44,12 @@ public class bombSpawner : MonoBehaviour {
 			betweenBombTimer -= Time.deltaTime;
 		else {
 			if (Random.Range(0, RATIO) == 0) {
-				CreateBomb();
+				if (Random.Range (0, parachuteRatio) == 0)
+					CreateBomb ("preParachuteBomb");
+				else if (Random.Range (0, bounceRatio) == 0)
+					CreateBomb ("preBouncingBomb");
+				else
+					CreateBomb("preBomb");
 			}
 			else if (Random.Range(0, RATIO*2) == 0 && beforeGrenadeTimer <= 0 && grenades.Count == 0) {
 				CreateGrenadeWarning();
@@ -61,13 +72,22 @@ public class bombSpawner : MonoBehaviour {
 		}
 	}
 
-	void CreateBomb() {
+	void CreateBomb(string type) {
 		Vector2 startPos;
-		if (Random.Range (0, 2) == 0)
-			startPos = new Vector2(SPAWN_X_LEFT, SPAWN_Y_BOMB);
-		else
-			startPos = new Vector2(SPAWN_X_RIGHT, SPAWN_Y_BOMB);
-		GameObject b = (GameObject) Instantiate (Resources.Load ("preBomb"), startPos, Quaternion.identity);
+		if (Random.Range (0, 2) == 0) {
+			if (type == "preParachuteBomb")
+				startPos = new Vector2 (Random.Range (SPAWN_X_LEFT, SPAWN_X_LEFT_PARA), SPAWN_Y_PARACHUTE);
+			else
+				startPos = new Vector2 (SPAWN_X_LEFT, SPAWN_Y_BOMB);
+
+		}
+		else {
+			if (type == "preParachuteBomb")
+				startPos = new Vector2 (Random.Range (SPAWN_X_RIGHT_PARA, SPAWN_X_RIGHT), SPAWN_Y_PARACHUTE);
+			else
+				startPos = new Vector2(SPAWN_X_RIGHT, SPAWN_Y_BOMB);
+		}
+		GameObject b = (GameObject) Instantiate (Resources.Load (type), startPos, Quaternion.identity);
 		bombs.Add (b);
 		betweenBombTimer = BETWEEN_BOMB_MAX;
 	}
@@ -84,7 +104,7 @@ public class bombSpawner : MonoBehaviour {
 			}
 		}
 		Vector2 startPos = new Vector2(0, 0);
-		if (Random.Range (0, 2) == 0 && canSpawnLeft) {
+		if (((Random.Range (0, 2) == 0 || !canSpawnRight) && canSpawnLeft)) {
 			startPos = new Vector2 (SPAWN_X_LEFT + 3, SPAWN_Y_GRENADE);
 			grenadeLoc = "left";
 		} 

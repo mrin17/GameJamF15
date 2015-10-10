@@ -9,7 +9,7 @@ using System.Collections;
 public class explosionDestroyer : MonoBehaviour {
 
 	ParticleSystem ps;
-	float destroyCollisionBoxTimer = .5f;
+	float destroyCollisionBoxTimer = .25f;
 
 	// Use this for initialization
 	void Start () {
