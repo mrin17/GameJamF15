@@ -5,7 +5,7 @@ public class bouncingBomb : bomb {
 
 	protected new void Start() {
 		base.Start ();
-		GetComponent<Rigidbody2D> ().gravityScale = 2;
+		GetComponent<Rigidbody2D> ().gravityScale = GRAVITY_SCALE;
 	}
 
 	protected new void OnCollisionEnter2D(Collision2D other) {
