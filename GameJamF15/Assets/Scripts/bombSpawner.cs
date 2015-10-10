@@ -18,8 +18,10 @@ public class bombSpawner : MonoBehaviour {
 	List<GameObject> bombs = new List<GameObject> ();
 	List<GameObject> grenades = new List<GameObject> ();
 
-	const float BEFORE_GRENADE_MAX = 3f;
+	public const float BEFORE_GRENADE_MAX = 3f;
 	float beforeGrenadeTimer = 0;
+
+	string grenadeLoc = "";
 
 	// Use this for initialization
 	void Start () {
@@ -28,14 +30,33 @@ public class bombSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		UpdateLists ();
+		if (beforeGrenadeTimer > 0) {
+			beforeGrenadeTimer -= Time.deltaTime;
+		}
 		if (betweenBombTimer > 0)
 			betweenBombTimer -= Time.deltaTime;
 		else {
 			if (Random.Range(0, RATIO) == 0) {
 				CreateBomb();
 			}
-			else if (Random.Range(0, RATIO/3) == 0) {
-				CreateGrenade ();
+			else if (Random.Range(0, RATIO*2) == 0 && beforeGrenadeTimer <= 0 && grenades.Count == 0) {
+				CreateGrenadeWarning();
+			}
+		}
+	}
+
+	void UpdateLists() {
+		for (int i = 0; i < bombs.Count; i++) {
+			if (bombs [i] == null) {
+				bombs.RemoveAt (i);
+				i--;
+			}
+		}
+		for (int i = 0; i < grenades.Count; i++) {
+			if (grenades [i] == null) {
+				grenades.RemoveAt (i);
+				i--;
 			}
 		}
 	}
@@ -51,15 +72,11 @@ public class bombSpawner : MonoBehaviour {
 		betweenBombTimer = BETWEEN_BOMB_MAX;
 	}
 
-	void CreateGrenade() {
+	void CreateGrenadeWarning() {
 		bool canSpawnLeft = false;
 		bool canSpawnRight = false;
 		for (int i = 0; i < bombs.Count; i++) {
-			if (bombs[i] == null) {
-				bombs.RemoveAt(i);
-				i--;
-			}
-			else if (bombs[i].GetComponent<bomb>().direction > 0) {
+			if (bombs[i].GetComponent<bomb>().direction > 0) {
 				canSpawnLeft = true;
 			}
 			else {
@@ -67,11 +84,28 @@ public class bombSpawner : MonoBehaviour {
 			}
 		}
 		Vector2 startPos = new Vector2(0, 0);
-		if (Random.Range (0, 2) == 0 && canSpawnLeft)
-			startPos = new Vector2(SPAWN_X_LEFT, SPAWN_Y_GRENADE);
-		else if (canSpawnRight)
-			startPos = new Vector2(SPAWN_X_RIGHT, SPAWN_Y_GRENADE);
+		if (Random.Range (0, 2) == 0 && canSpawnLeft) {
+			startPos = new Vector2 (SPAWN_X_LEFT + 3, SPAWN_Y_GRENADE);
+			grenadeLoc = "left";
+		} 
+		else if (canSpawnRight) {
+			startPos = new Vector2 (SPAWN_X_RIGHT - 3, SPAWN_Y_GRENADE);
+			grenadeLoc = "right";
+		}
 		if (canSpawnLeft || canSpawnRight) {
+			GameObject g = (GameObject)Instantiate (Resources.Load ("preGrenadeWarning"), startPos, Quaternion.identity);
+			beforeGrenadeTimer = BEFORE_GRENADE_MAX;
+		}
+	}
+
+	public void CreateGrenade() {
+
+		Vector2 startPos = new Vector2(0, 0);
+		if (grenadeLoc == "left")
+			startPos = new Vector2(SPAWN_X_LEFT, SPAWN_Y_GRENADE);
+		else if (grenadeLoc == "right")
+			startPos = new Vector2(SPAWN_X_RIGHT, SPAWN_Y_GRENADE);
+		if (grenadeLoc != "") {
 			GameObject g = (GameObject)Instantiate (Resources.Load ("preGrenade"), startPos, Quaternion.identity);
 			grenades.Add (g);
 		}
