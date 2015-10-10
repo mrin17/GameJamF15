@@ -8,6 +8,7 @@ using System.Collections;
 public class explosionDestroyer : MonoBehaviour {
 
 	ParticleSystem ps;
+	float destroyCollisionBoxTimer = .5f;
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +18,10 @@ public class explosionDestroyer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (destroyCollisionBoxTimer > 0)
+			destroyCollisionBoxTimer -= Time.deltaTime;
+		else if (destroyCollisionBoxTimer < 0)
+			GetComponent<CircleCollider2D> ().enabled = false;
 		if (ps.isStopped)
 			Destroy (gameObject);
 	}

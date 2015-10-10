@@ -6,13 +6,19 @@ public class bomb : MonoBehaviour {
 
 	Vector2 force = new Vector2(0, 0);
 	const float INITIAL_VELOCITY = .03f;
+	public float direction = 0;
 
 	// Use this for initialization
 	void Start () {
-		if ((Vector2) transform.position == new Vector2(bombSpawner.SPAWN_X_LEFT, bombSpawner.SPAWN_Y))
+		if ((Vector2) transform.position == new Vector2(bombSpawner.SPAWN_X_LEFT, bombSpawner.SPAWN_Y_BOMB))
 			force = new Vector2(INITIAL_VELOCITY, 0);
-		else if ((Vector2) transform.position == new Vector2(bombSpawner.SPAWN_X_RIGHT, bombSpawner.SPAWN_Y))
+		else if ((Vector2) transform.position == new Vector2(bombSpawner.SPAWN_X_RIGHT, bombSpawner.SPAWN_Y_BOMB))
 			force = new Vector2(-INITIAL_VELOCITY, 0);
+		else if ((Vector2) transform.position == new Vector2(bombSpawner.SPAWN_X_LEFT, bombSpawner.SPAWN_Y_GRENADE))
+			force = new Vector2(INITIAL_VELOCITY*3, 0);
+		else if ((Vector2) transform.position == new Vector2(bombSpawner.SPAWN_X_RIGHT, bombSpawner.SPAWN_Y_GRENADE))
+			force = new Vector2(-INITIAL_VELOCITY*3, 0);
+		direction = force.x;
 	}
 	
 	// Update is called once per frame
