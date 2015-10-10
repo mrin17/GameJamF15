@@ -11,7 +11,7 @@ public class bouncingBomb : bomb {
 	protected new void OnCollisionEnter2D(Collision2D other) {
 		base.OnCollisionEnter2D (other);
 		if (other.gameObject.tag == "Ground") {
-			force = new Vector2 (direction / 1.5f, LIFT_FORCE_Y / 2f);
+			force = new Vector2 (direction, LIFT_FORCE_Y / 2f);
 			GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 0);
 			GetComponent<Rigidbody2D> ().AddForce (force);
 		}

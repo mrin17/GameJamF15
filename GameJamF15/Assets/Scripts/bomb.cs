@@ -38,8 +38,11 @@ public class bomb : MonoBehaviour {
 	//3) player's attack 2: the bomb gets tossed in the air and goes in the opposite direction, not much horizontal
 	//4) hits the beard/tower/whatever, and the player loses
 	protected void OnCollisionEnter2D(Collision2D other) {
-		if (other.gameObject.tag == "Bomb" || (explodeOnAnyCollision && other.gameObject.tag != "Player")) {
+		if (other.gameObject.tag == "Bomb" || other.gameObject.tag == "Kevin" || (explodeOnAnyCollision && other.gameObject.tag != "Player")) {
 			Explode ();
+		}
+		if (other.gameObject.tag == "Kevin") {
+			other.gameObject.GetComponent<kevinMonument>().takeDamage();
 		}
 	}
 

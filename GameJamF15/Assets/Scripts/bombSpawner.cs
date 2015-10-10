@@ -72,9 +72,13 @@ public class bombSpawner : MonoBehaviour {
 		}
 	}
 
-	void CreateBomb(string type) {
+	public void CreateBomb(string type) {
+		CreateBomb (type, "");
+	}
+
+	public void CreateBomb(string type, string dir) {
 		Vector2 startPos;
-		if (Random.Range (0, 2) == 0) {
+		if ((Random.Range (0, 2) == 0 && dir != "right") || dir == "left") {
 			if (type == "preParachuteBomb")
 				startPos = new Vector2 (Random.Range (SPAWN_X_LEFT, SPAWN_X_LEFT_PARA), SPAWN_Y_PARACHUTE);
 			else
@@ -114,6 +118,7 @@ public class bombSpawner : MonoBehaviour {
 		}
 		if (canSpawnLeft || canSpawnRight) {
 			GameObject g = (GameObject)Instantiate (Resources.Load ("preGrenadeWarning"), startPos, Quaternion.identity);
+			CreateBomb ("preBomb", grenadeLoc);
 			beforeGrenadeTimer = BEFORE_GRENADE_MAX;
 		}
 	}
