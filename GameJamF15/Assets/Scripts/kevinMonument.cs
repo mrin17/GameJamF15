@@ -50,6 +50,7 @@ public class kevinMonument : MonoBehaviour {
 			myAnim.SetInteger ("level", 4);
 			gameOverTimer = GAME_OVER_MAX;
 			gameOver = true;
+            GetComponent<PolygonCollider2D>().enabled = false;
             FindObjectOfType<bombSpawner>().GetComponent<AudioSource>().Stop();
             FindObjectOfType<playerAttack>().playDeathSound();
         }
