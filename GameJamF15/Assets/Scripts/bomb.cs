@@ -24,13 +24,18 @@ public class bomb : MonoBehaviour {
 			force = new Vector2(-INITIAL_VELOCITY*5, 0);
 		direction = force.x;
 		GetComponent<Rigidbody2D> ().AddForce (force);
+        if (direction > 0)
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//transform.Translate (force);
 		if (transform.position.x < bombSpawner.SPAWN_X_LEFT || transform.position.x > bombSpawner.SPAWN_X_RIGHT)
-			Destroy (gameObject);
+        {
+            FindObjectOfType<playerAttack>().addToScore();
+            Destroy(gameObject);
+        }
 	}
 
 	//different types of collisions
@@ -39,10 +44,8 @@ public class bomb : MonoBehaviour {
 	//3) player's attack 2: the bomb gets tossed in the air and goes in the opposite direction, not much horizontal
 	//4) hits the beard/tower/whatever, and the player loses
 	protected void OnCollisionEnter2D(Collision2D other) {
-		if (other.gameObject.tag == "Bomb" || other.gameObject.tag == "Kevin" || explodeOnAnyCollision || 
-		    (other.gameObject.tag == "Player" && (!other.gameObject.GetComponent<playerAttack>().isAttacking() || (other.gameObject.GetComponent<playerAttack>().isAttacking() &&
-		 !((other.gameObject.transform.position.x > transform.position.x && other.gameObject.GetComponent<CubeControl>().getLastDir() < 0) || 
-		 (other.gameObject.transform.position.x < transform.position.x && other.gameObject.GetComponent<CubeControl>().getLastDir() > 0)))))) {
+		if (other.gameObject.tag == "Bomb" || other.gameObject.tag == "Kevin" || other.gameObject.tag == "Explosion" || explodeOnAnyCollision || 
+		    (other.gameObject.tag == "Player" && other.gameObject.GetComponent<playerAttack>().canExplode(gameObject))) {
 			Explode ();
 		}
 		if (other.gameObject.tag == "Kevin") {

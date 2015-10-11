@@ -116,7 +116,7 @@ public class playerAttack : MonoBehaviour {
 			if (dir > 0)
 				attack.transform.position = transform.position + new Vector3(.5f, -.35f+addOn, 0);
 			else if (dir < 0)
-				attack.transform.position = transform.position + new Vector3(-.5f, -.35f+addOn, 0);;
+				attack.transform.position = transform.position + new Vector3(-.5f, -.35f+addOn, 0);
 		}
 
 		if (attackCooldownTimer < 0) {
@@ -140,6 +140,11 @@ public class playerAttack : MonoBehaviour {
 		return attack != null;
 	}
 
+    public string getAttackType()
+    {
+        return attackType;
+    }
+
 	public void takeDamage() {
 		health--;
 		FindObjectOfType<scrCameraShake> ().Shake (.5f);
@@ -156,6 +161,14 @@ public class playerAttack : MonoBehaviour {
     public void addToScore() {
         score += 100;
     }
+
+    public bool canExplode(GameObject go)
+    {
+        return (!isAttacking() || (isAttacking() && (getAttackType() == "overhead" ||
+         !((transform.position.x > go.transform.position.x && GetComponent<CubeControl>().getLastDir() < 0) ||
+         (transform.position.x < go.transform.position.x && GetComponent<CubeControl>().getLastDir() > 0)))));
+    }
+
     public void death() {
         FindObjectOfType<bombSpawner>().GetComponent<AudioSource>().Stop();
         anim.SetBool("crumbling", true);

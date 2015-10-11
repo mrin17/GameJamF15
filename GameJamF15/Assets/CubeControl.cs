@@ -14,13 +14,13 @@ public class CubeControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	if (Input.GetKey (KeyCode.LeftArrow)) {
+	if (Input.GetKey (KeyCode.LeftArrow) && transform.position.x > -12) {
 			transform.Translate(new Vector3(-.1f, 0, 0));
 			if (!GetComponent<playerAttack>().isAttacking())
 				lastDirection = -1;
 			walking = true;
 		}
-		else if (Input.GetKey (KeyCode.RightArrow)) {
+		else if (Input.GetKey (KeyCode.RightArrow) && transform.position.x < 12) {
 			transform.Translate(new Vector3(.1f, 0, 0));
 			if (!GetComponent<playerAttack>().isAttacking())
 				lastDirection = 1;

@@ -18,9 +18,11 @@ public class bombSpawner : MonoBehaviour {
 
 	const float BETWEEN_BOMB_MAX = .5f;
 	float betweenBombTimer = 0;
-	const int RATIO = 100;
+	const int RATIO_INIT = 150;
+    int ratio = RATIO_INIT;
 	int bounceRatio = 4;
 	int parachuteRatio = 4;
+    float timePassed = 0;
 
 	List<GameObject> bombs = new List<GameObject> ();
 	List<GameObject> grenades = new List<GameObject> ();
@@ -37,6 +39,8 @@ public class bombSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        timePassed += Time.deltaTime;
+        ratio = RATIO_INIT - ((int)timePassed / 10);
 		UpdateLists ();
 		if (beforeGrenadeTimer > 0) {
 			beforeGrenadeTimer -= Time.deltaTime;
@@ -44,7 +48,7 @@ public class bombSpawner : MonoBehaviour {
 		if (betweenBombTimer > 0)
 			betweenBombTimer -= Time.deltaTime;
 		else {
-			if (Random.Range(0, RATIO) == 0) {
+			if (Random.Range(0, ratio) == 0) {
 				if (Random.Range (0, parachuteRatio) == 0)
 					CreateBomb ("preParachuteBomb");
 				else if (Random.Range (0, bounceRatio) == 0)
@@ -52,7 +56,7 @@ public class bombSpawner : MonoBehaviour {
 				else
 					CreateBomb("preBomb");
 			}
-			else if (Random.Range(0, RATIO*2) == 0 && beforeGrenadeTimer <= 0 && grenades.Count == 0) {
+			else if (Random.Range(0, ratio * 2) == 0 && beforeGrenadeTimer <= 0 && grenades.Count == 0) {
 				CreateGrenadeWarning();
 			}
 		}
