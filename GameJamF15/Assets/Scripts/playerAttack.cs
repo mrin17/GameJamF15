@@ -20,7 +20,12 @@ public class playerAttack : MonoBehaviour {
 	float attackIntroTimer = 0;
 	float attackCooldownTimer = 0;
 
-	GameObject attack;
+    private AudioSource source;
+    AudioClip kickSound;
+    AudioClip liftSound;
+    AudioClip lifeSound;
+
+    GameObject attack;
 	string attackType = ""; //kick, lift, overhead
 
 	public const float MAX_HEALTH = 5;
@@ -32,8 +37,13 @@ public class playerAttack : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        source = GetComponent<AudioSource>();
 		anim = GetComponent<Animator> ();
-	}
+        kickSound = (AudioClip)Resources.Load("Kick");
+        liftSound = (AudioClip)Resources.Load("Lift");
+        lifeSound = (AudioClip)Resources.Load("GetLife");
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -67,7 +77,8 @@ public class playerAttack : MonoBehaviour {
 			attackTimer = KICK_MAX;
 			attackIntroTimer = KICK_INTRO_MAX;
 			attackCooldownTimer = KICK_COOL_MAX;
-			//SET KICK ANIM
+            //SET KICK ANIM
+            source.PlayOneShot(kickSound, 1F);
 			attackType = "kick";
 			anim.SetInteger("attackType", 1);
 			//CREATE SOME SORT OF OBJ (after introtimer is done)
@@ -78,8 +89,9 @@ public class playerAttack : MonoBehaviour {
 			attackIntroTimer = LIFT_INTRO_MAX;
 			attackCooldownTimer = LIFT_COOL_MAX;
 			attackType = "lift";
-			//SET LIFT ANIM
-			anim.SetInteger("attackType", 2);
+            //SET LIFT ANIM
+            source.PlayOneShot(liftSound, 1F);
+            anim.SetInteger("attackType", 2);
 			//CREATE SOME SORT OF OBJ (after introtimer is done)
 
 		}
@@ -87,10 +99,12 @@ public class playerAttack : MonoBehaviour {
 			attackTimer = OVERHEAD_MAX;
 			attackIntroTimer = OVERHEAD_INTRO_MAX;
 			attackCooldownTimer = OVERHEAD_COOL_MAX;
+
 			attackType = "overhead";
-			//we dont need to set an anim for this
-			//CREATE SOME SORT OF OBJ (after introtimer is done)
-		}
+            source.PlayOneShot(liftSound, 1F);
+            //we dont need to set an anim for this
+            //CREATE SOME SORT OF OBJ (after introtimer is done)
+        }
 		if (attack != null && attackType != "overhead") {
 			float addOn = 0;
 			if (attackType == "lift")
