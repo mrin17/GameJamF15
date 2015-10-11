@@ -5,14 +5,15 @@ public class playerAttack : MonoBehaviour {
 
 	readonly string PUSH_ATTACK = "z";
 	readonly string LIFT_ATTACK = "x";
+	readonly string OVERHEAD_ATTACK = "c";
 
 	const float PUSH_MAX = .25f;
-	float pushTimer = 0;
-
 	const float LIFT_MAX = .25f;
-	float liftTimer = 0;
+	const float OVERHEAD_MAX = .5f;
+	float attackTimer = 0;
 
 	GameObject attack;
+	bool overheadAttack = false;
 
 	public const float MAX_HEALTH = 5;
 	float health = MAX_HEALTH;
@@ -25,27 +26,31 @@ public class playerAttack : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//you cant attack while youre attacking
-		if (liftTimer > 0) {
-			liftTimer -= Time.deltaTime;
-		}
-		else if (pushTimer > 0) {
-			pushTimer -= Time.deltaTime;
+		if (attackTimer > 0) {
+			attackTimer -= Time.deltaTime;
 		}
 		//attack keys
 		else if (Input.GetKeyDown (PUSH_ATTACK)) {
-			pushTimer = PUSH_MAX;
+			attackTimer = PUSH_MAX;
 			//CREATE SOME SORT OF OBJ
 			attack = (GameObject) Instantiate (Resources.Load ("prePushAttack"), transform.position, Quaternion.identity);
 			//SET PUSH ANIM
 		}
 		else if (Input.GetKeyDown (LIFT_ATTACK)) {
-			liftTimer = LIFT_MAX;
+			attackTimer = LIFT_MAX;
 			//CREATE SOME SORT OF OBJ
 			attack = (GameObject) Instantiate (Resources.Load ("preLiftAttack"), transform.position, Quaternion.identity);
 			//SET LIFT ANIM
 		}
+		else if (Input.GetKeyDown (OVERHEAD_ATTACK)) {
+			attackTimer = OVERHEAD_MAX;
+			//CREATE SOME SORT OF OBJ
+			overheadAttack = true;
+			attack = (GameObject) Instantiate (Resources.Load ("preThrownRock"), transform.position + new Vector3(0, .7f, 0), Quaternion.identity);
+			//SET LIFT ANIM
+		}
 
-		if (attack != null) {
+		if (attack != null && !overheadAttack) {
 			//it has to lock on to the same location
 			float dir = GetComponent<CubeControl>().getLastDir();
 			if (dir > 0)
@@ -54,9 +59,9 @@ public class playerAttack : MonoBehaviour {
 				attack.transform.position = transform.position + new Vector3(-.75f, -.4f, 0);;
 		}
 
-		if (liftTimer < 0 || pushTimer < 0) {
-			liftTimer = 0;
-			pushTimer = 0;
+		if (attackTimer < 0) {
+			attackTimer = 0;
+			overheadAttack = false;
 			Destroy (attack);
 		}
 	}

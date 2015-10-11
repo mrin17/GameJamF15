@@ -13,7 +13,7 @@ public class bombSpawner : MonoBehaviour {
 
 	public const float SPAWN_Y_BOMB = -3.85f;
 	public const float SPAWN_Y_GRENADE = -1f;
-	public const float SPAWN_Y_PARACHUTE = 5f;
+	public const float SPAWN_Y_PARACHUTE = 7f;
 
 	const float BETWEEN_BOMB_MAX = .5f;
 	float betweenBombTimer = 0;

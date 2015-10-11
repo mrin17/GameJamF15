@@ -67,3 +67,5 @@ $RECYCLE.BIN/
 *.csproj
 GameJamF15/GameJamF15-csharp.sln
 *.sln
+GameJamF15/Assembly-UnityScript-vs.unityproj
+*.unityproj
