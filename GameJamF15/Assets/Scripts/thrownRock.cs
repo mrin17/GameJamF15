@@ -9,6 +9,7 @@ public class thrownRock : MonoBehaviour {
 	void Start () {
 		GetComponent<Rigidbody2D> ().AddForce (new Vector2(0, 1050));
 		maxy = transform.position.y;
+		transform.localScale = GameObject.FindGameObjectWithTag ("Player").transform.localScale;
 	}
 	
 	// Update is called once per frame
@@ -18,7 +19,8 @@ public class thrownRock : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
-		Destroy (gameObject);
+		if (!(other.gameObject.tag == "Player" || other.gameObject.tag == "Kevin"))
+			Destroy (gameObject);
 	}
 
 	void OnDestroy() {
