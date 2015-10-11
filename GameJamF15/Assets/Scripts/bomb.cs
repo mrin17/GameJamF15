@@ -51,6 +51,9 @@ public class bomb : MonoBehaviour {
 		if (other.gameObject.tag == "Player") {
 			other.gameObject.GetComponent<playerAttack>().takeDamage();
 		}
+        if (other.gameObject.tag == "Bomb" || other.gameObject.tag == "Explosion") {
+            FindObjectOfType<playerAttack>().addToScore();
+        }
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {

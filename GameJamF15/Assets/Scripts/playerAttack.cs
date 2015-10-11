@@ -16,9 +16,11 @@ public class playerAttack : MonoBehaviour {
 
 	public const float MAX_HEALTH = 5;
 	float health = MAX_HEALTH;
+    public const float X_LIFE_SCORE = 1000;
+    float score = 0;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -44,8 +46,7 @@ public class playerAttack : MonoBehaviour {
 			attack = (GameObject) Instantiate (Resources.Load ("preLiftAttack"), transform.position, Quaternion.identity);
 			//SET LIFT ANIM
 		}
-
-		if (attack != null) {
+        if (attack != null) {
 			//it has to lock on to the same location
 			float dir = GetComponent<CubeControl>().getLastDir();
 			if (dir > 0)
@@ -74,4 +75,11 @@ public class playerAttack : MonoBehaviour {
 	public float getHealth() { 
 		return health; 
 	}
+    public float getScore()
+    {
+        return score;
+    }
+    public void addToScore() {
+        score += 100;
+    }
 }
