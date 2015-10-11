@@ -114,7 +114,7 @@ public class playerAttack : MonoBehaviour {
 			if (dir > 0)
 				attack.transform.position = transform.position + new Vector3(.5f, -.35f+addOn, 0);
 			else if (dir < 0)
-				attack.transform.position = transform.position + new Vector3(-.5f, -.35f+addOn, 0);;
+				attack.transform.position = transform.position + new Vector3(-.5f, -.35f+addOn, 0);
 		}
 
 		if (attackCooldownTimer < 0) {
@@ -127,6 +127,11 @@ public class playerAttack : MonoBehaviour {
 	public bool isAttacking() {
 		return attack != null;
 	}
+
+    public string getAttackType()
+    {
+        return attackType;
+    }
 
 	public void takeDamage() {
 		health--;
@@ -143,5 +148,12 @@ public class playerAttack : MonoBehaviour {
     }
     public void addToScore() {
         score += 100;
+    }
+
+    public bool canExplode(GameObject go)
+    {
+        return (!isAttacking() || (isAttacking() && (getAttackType() == "overhead" ||
+         !((transform.position.x > go.transform.position.x && GetComponent<CubeControl>().getLastDir() < 0) ||
+         (transform.position.x < go.transform.position.x && GetComponent<CubeControl>().getLastDir() > 0)))));
     }
 }
