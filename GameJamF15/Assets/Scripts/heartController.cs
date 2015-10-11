@@ -20,8 +20,8 @@ public class heartController : MonoBehaviour {
     }
 
 	void Update() {
-        float score = FindObjectOfType<playerAttack>().getScore();
-        if ((score % 2000) == 0 && score > 0 && (int)score != lastExtraLifeScore)
+        float score = FindObjectOfType<getScoreScript>().getScore();
+        if ((score % getScoreScript.X_LIFE_SCORE) == 0 && score > 0 && (int)score != lastExtraLifeScore)
         {
             lastExtraLifeScore = (int) score;
             source.PlayOneShot(lifeSound, 1f);
