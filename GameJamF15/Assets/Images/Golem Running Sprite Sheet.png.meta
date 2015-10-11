@@ -1,0 +1,187 @@
+fileFormatVersion: 2
+guid: 294e99aff51109e48a3a5b574e9e94dd
+timeCreated: 1444503411
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Golem Running Sprite Sheet_0
+    21300002: Golem Running Sprite Sheet_1
+    21300004: Golem Running Sprite Sheet_2
+    21300006: Golem Running Sprite Sheet_3
+    21300008: Golem Running Sprite Sheet_4
+    21300010: Golem Running Sprite Sheet_5
+    21300012: Golem Running Sprite Sheet_6
+    21300014: Golem Running Sprite Sheet_7
+    21300016: Golem Running Sprite Sheet_8
+    21300018: Golem Running Sprite Sheet_9
+    21300020: Golem Running Sprite Sheet_10
+    21300022: Golem Running Sprite Sheet_11
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 25
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Golem Running Sprite Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 7
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Golem Running Sprite Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 7
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Golem Running Sprite Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 8
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Golem Running Sprite Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 8
+        width: 30
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Golem Running Sprite Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 8
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Golem Running Sprite Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 7
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Golem Running Sprite Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 7
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Golem Running Sprite Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 7
+        width: 26
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Golem Running Sprite Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 7
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Golem Running Sprite Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 7
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Golem Running Sprite Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 7
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Golem Running Sprite Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 7
+        width: 26
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

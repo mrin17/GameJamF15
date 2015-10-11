@@ -4,12 +4,15 @@ using System.Collections;
 //Mike - this class represents a bomb
 public class bomb : MonoBehaviour {
 
-	Vector2 force = new Vector2(0, 0);
-	const float INITIAL_VELOCITY = .03f;
+	protected Vector2 force = new Vector2(0, 0);
+	protected const float INITIAL_VELOCITY = .03f;
+	protected const float LIFT_FORCE_Y = .165f;
 	public float direction = 0;
 
+	protected bool explodeOnAnyCollision = false;
+
 	// Use this for initialization
-	void Start () {
+	protected void Start () {
 		if ((Vector2) transform.position == new Vector2(bombSpawner.SPAWN_X_LEFT, bombSpawner.SPAWN_Y_BOMB))
 			force = new Vector2(INITIAL_VELOCITY, 0);
 		else if ((Vector2) transform.position == new Vector2(bombSpawner.SPAWN_X_RIGHT, bombSpawner.SPAWN_Y_BOMB))
@@ -19,11 +22,12 @@ public class bomb : MonoBehaviour {
 		else if ((Vector2) transform.position == new Vector2(bombSpawner.SPAWN_X_RIGHT, bombSpawner.SPAWN_Y_GRENADE))
 			force = new Vector2(-INITIAL_VELOCITY*5, 0);
 		direction = force.x;
+		GetComponent<Rigidbody2D> ().AddForce (force);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Translate (force);
+		//transform.Translate (force);
 		if (transform.position.x < bombSpawner.SPAWN_X_LEFT || transform.position.x > bombSpawner.SPAWN_X_RIGHT)
 			Destroy (gameObject);
 	}
@@ -33,10 +37,30 @@ public class bomb : MonoBehaviour {
 	//2) player's attack 1: the bomb rolls back in the opposite direction
 	//3) player's attack 2: the bomb gets tossed in the air and goes in the opposite direction, not much horizontal
 	//4) hits the beard/tower/whatever, and the player loses
-	void OnCollisionEnter2D(Collision2D other) {
-		if (other.gameObject.tag == "Bomb") {
+	protected void OnCollisionEnter2D(Collision2D other) {
+		if (other.gameObject.tag == "Bomb" || other.gameObject.tag == "Kevin" || explodeOnAnyCollision || other.gameObject.tag == "Player") {
 			Explode ();
 		}
+		if (other.gameObject.tag == "Kevin") {
+			other.gameObject.GetComponent<kevinMonument>().takeDamage();
+		}
+		if (other.gameObject.tag == "Player") {
+			other.gameObject.GetComponent<playerAttack>().takeDamage();
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.gameObject.tag == "PushAttack") {
+			force = new Vector2(direction, 0) * -4;
+		}
+		if (other.gameObject.tag == "LiftAttack") {
+			GetComponent<Rigidbody2D>().gravityScale = 2;
+			force = new Vector2(-direction, LIFT_FORCE_Y);
+			explodeOnAnyCollision = true;
+		}
+		GetComponent<Rigidbody2D> ().velocity = new Vector2(0, 0);
+		GetComponent<Rigidbody2D> ().AddForce (force);
+		direction = -direction;
 	}
 
 	void Explode() {
