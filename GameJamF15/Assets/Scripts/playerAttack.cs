@@ -91,12 +91,15 @@ public class playerAttack : MonoBehaviour {
 		}
 
 		if (attack != null && attackType != "overhead") {
+			float addOn = 0;
+			if (attackType == "lift")
+				addOn = .1f;
 			//it has to lock on to the same location
 			float dir = GetComponent<CubeControl>().getLastDir();
 			if (dir > 0)
-				attack.transform.position = transform.position + new Vector3(.5f, -.35f, 0);
+				attack.transform.position = transform.position + new Vector3(.5f, -.35f+addOn, 0);
 			else if (dir < 0)
-				attack.transform.position = transform.position + new Vector3(-.5f, -.35f, 0);;
+				attack.transform.position = transform.position + new Vector3(-.5f, -.35f+addOn, 0);;
 		}
 
 		if (attackCooldownTimer < 0) {

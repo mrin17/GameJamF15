@@ -12,6 +12,8 @@ public class kevinMonument : MonoBehaviour {
 	bool gameOver = false;
 	const float GAME_OVER_MAX = .5f;
 	float gameOverTimer = 0;
+	const float LOSE_MAX = .5f;
+	float loseTimer = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -27,8 +29,9 @@ public class kevinMonument : MonoBehaviour {
 		if (gameOver) {
 			if (gameOverTimer > 0)
 				gameOverTimer -= Time.deltaTime;
-			else 
+			else {
 				Destroy (gameObject);
+			}
 		}
 	}
 
