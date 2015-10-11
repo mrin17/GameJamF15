@@ -1,0 +1,133 @@
+fileFormatVersion: 2
+guid: 5c4471b999b649340bdccc1147d4945e
+timeCreated: 1444582510
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Golem Crumble Sprite Sheet_0
+    21300002: Golem Crumble Sprite Sheet_1
+    21300004: Golem Crumble Sprite Sheet_2
+    21300006: Golem Crumble Sprite Sheet_3
+    21300008: Golem Crumble Sprite Sheet_4
+    21300010: Golem Crumble Sprite Sheet_9
+    21300012: Golem Crumble Sprite Sheet_10
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 25
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Golem Crumble Sprite Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 0
+        width: 29
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Golem Crumble Sprite Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 0
+        width: 29
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Golem Crumble Sprite Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 0
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Golem Crumble Sprite Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 0
+        width: 36
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Golem Crumble Sprite Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 0
+        width: 37
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Golem Crumble Sprite Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 0
+        width: 37
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Golem Crumble Sprite Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 0
+        width: 37
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

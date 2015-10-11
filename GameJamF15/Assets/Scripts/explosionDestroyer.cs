@@ -5,18 +5,25 @@ using System.Collections;
 
 //Mike
 //this waits for the explosion to be finished until destroying it
+//also it destroys the collision box halfway through
 public class explosionDestroyer : MonoBehaviour {
 
 	ParticleSystem ps;
+	float destroyCollisionBoxTimer = .25f;
 
 	// Use this for initialization
 	void Start () {
 		ps = GetComponent<ParticleSystem> ();
+		FindObjectOfType<scrCameraShake> ().Shake (.125f);
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (destroyCollisionBoxTimer > 0)
+			destroyCollisionBoxTimer -= Time.deltaTime;
+		else if (destroyCollisionBoxTimer < 0)
+			GetComponent<CircleCollider2D> ().enabled = false;
 		if (ps.isStopped)
 			Destroy (gameObject);
 	}

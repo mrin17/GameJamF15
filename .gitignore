@@ -63,3 +63,12 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+*.userprefs
+*.csproj
+GameJamF15/GameJamF15-csharp.sln
+*.sln
+GameJamF15/Assembly-UnityScript-vs.unityproj
+*.unityproj
+GameJamF15/ProjectSettings/UnityAnalyticsManager.asset
+GameJamF15/ProjectSettings/UnityAnalyticsManager.asset
+GameJamF15/ProjectSettings/UnityAdsSettings.asset
