@@ -25,6 +25,8 @@ public class playerAttack : MonoBehaviour {
 
 	public const float MAX_HEALTH = 5;
 	float health = MAX_HEALTH;
+    public const float X_LIFE_SCORE = 1000;
+    float score = 0;
 
 	Animator anim;
 
@@ -89,7 +91,6 @@ public class playerAttack : MonoBehaviour {
 			//we dont need to set an anim for this
 			//CREATE SOME SORT OF OBJ (after introtimer is done)
 		}
-
 		if (attack != null && attackType != "overhead") {
 			float addOn = 0;
 			if (attackType == "lift")
@@ -122,4 +123,11 @@ public class playerAttack : MonoBehaviour {
 	public float getHealth() { 
 		return health; 
 	}
+    public float getScore()
+    {
+        return score;
+    }
+    public void addToScore() {
+        score += 100;
+    }
 }

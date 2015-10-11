@@ -15,8 +15,8 @@ public class heartController : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Input.GetKeyDown ("o"))
-			addHeart ();
+		if ((FindObjectOfType<playerAttack>().getScore() % 2000) == 0 && FindObjectOfType<playerAttack>().getScore() > 0)
+			addHeart();
 	}
 	
 	public void addHeart() {
