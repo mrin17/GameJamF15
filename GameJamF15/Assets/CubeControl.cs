@@ -6,6 +6,7 @@ public class CubeControl : MonoBehaviour {
 	float lastDirection = 1;
 	bool walking = false;
 	Animator anim;
+    public bool cantMove = false;
 
 	// Use this for initialization
 	void Start () {
@@ -14,6 +15,8 @@ public class CubeControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (cantMove)
+            return;
 	if (Input.GetKey (KeyCode.LeftArrow) && transform.position.x > -12) {
 			transform.Translate(new Vector3(-.1f, 0, 0));
 			if (!GetComponent<playerAttack>().isAttacking())

@@ -32,8 +32,6 @@ public class playerAttack : MonoBehaviour {
 
 	public const float MAX_HEALTH = 5;
 	float health = MAX_HEALTH;
-    public const float X_LIFE_SCORE = 1000;
-    float score = 0;
 
 	Animator anim;
 
@@ -132,7 +130,7 @@ public class playerAttack : MonoBehaviour {
                 gameOver++;
             }
             else if(!source.isPlaying)
-            { Application.LoadLevel("introScene"); }
+            { Application.LoadLevel("gameOverScene"); }
         }
 	}
 
@@ -154,13 +152,7 @@ public class playerAttack : MonoBehaviour {
 	public float getHealth() { 
 		return health; 
 	}
-    public float getScore()
-    {
-        return score;
-    }
-    public void addToScore() {
-        score += 100;
-    }
+
 
     public bool canExplode(GameObject go)
     {
@@ -172,6 +164,7 @@ public class playerAttack : MonoBehaviour {
     public void death() {
         FindObjectOfType<bombSpawner>().GetComponent<AudioSource>().Stop();
         anim.SetBool("crumbling", true);
+        GetComponent<CubeControl>().cantMove = true;
         source.PlayOneShot(deathSound, .5f);
     }
 }

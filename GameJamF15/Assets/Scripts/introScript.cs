@@ -11,6 +11,7 @@ public class introScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown("space")) {
+            FindObjectOfType<getScoreScript>().resetScore();
 			Application.LoadLevel("mikeTestScene");
 		}
 	}

@@ -33,7 +33,7 @@ public class bomb : MonoBehaviour {
 		//transform.Translate (force);
 		if (transform.position.x < bombSpawner.SPAWN_X_LEFT || transform.position.x > bombSpawner.SPAWN_X_RIGHT)
         {
-            FindObjectOfType<playerAttack>().addToScore();
+            FindObjectOfType<getScoreScript>().addToScore();
             Destroy(gameObject);
         }
 	}
@@ -55,7 +55,7 @@ public class bomb : MonoBehaviour {
 			other.gameObject.GetComponent<playerAttack>().takeDamage();
 		}
         if (other.gameObject.tag == "Bomb" || other.gameObject.tag == "Explosion") {
-            FindObjectOfType<playerAttack>().addToScore();
+            FindObjectOfType<getScoreScript>().addToScore();
         }
 	}
 
