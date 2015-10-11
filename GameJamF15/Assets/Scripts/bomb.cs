@@ -6,7 +6,8 @@ public class bomb : MonoBehaviour {
 
 	protected Vector2 force = new Vector2(0, 0);
 	protected const float INITIAL_VELOCITY = .03f;
-	protected const float LIFT_FORCE_Y = .165f;
+	protected const float LIFT_FORCE_Y = .2f; //.165f
+	protected const float GRAVITY_SCALE = 3; //2
 	public float direction = 0;
 
 	protected bool explodeOnAnyCollision = false;
@@ -38,7 +39,10 @@ public class bomb : MonoBehaviour {
 	//3) player's attack 2: the bomb gets tossed in the air and goes in the opposite direction, not much horizontal
 	//4) hits the beard/tower/whatever, and the player loses
 	protected void OnCollisionEnter2D(Collision2D other) {
-		if (other.gameObject.tag == "Bomb" || other.gameObject.tag == "Kevin" || explodeOnAnyCollision || other.gameObject.tag == "Player") {
+		if (other.gameObject.tag == "Bomb" || other.gameObject.tag == "Kevin" || explodeOnAnyCollision || 
+		    (other.gameObject.tag == "Player" && (!other.gameObject.GetComponent<playerAttack>().isAttacking() || (other.gameObject.GetComponent<playerAttack>().isAttacking() &&
+		 !((other.gameObject.transform.position.x > transform.position.x && other.gameObject.GetComponent<CubeControl>().getLastDir() < 0) || 
+		 (other.gameObject.transform.position.x < transform.position.x && other.gameObject.GetComponent<CubeControl>().getLastDir() > 0)))))) {
 			Explode ();
 		}
 		if (other.gameObject.tag == "Kevin") {
@@ -54,7 +58,7 @@ public class bomb : MonoBehaviour {
 			force = new Vector2(direction, 0) * -4;
 		}
 		if (other.gameObject.tag == "LiftAttack") {
-			GetComponent<Rigidbody2D>().gravityScale = 2;
+			GetComponent<Rigidbody2D>().gravityScale = GRAVITY_SCALE;
 			force = new Vector2(-direction, LIFT_FORCE_Y);
 			explodeOnAnyCollision = true;
 		}
