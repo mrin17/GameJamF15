@@ -10,7 +10,7 @@ public class kevinMonument : MonoBehaviour {
 	SpriteRenderer childSR;
 	Animator childAnim;
 	bool gameOver = false;
-	const float GAME_OVER_MAX = .5f;
+	const float GAME_OVER_MAX = 2f;
 	float gameOverTimer = 0;
 	const float LOSE_MAX = .5f;
 	float loseTimer = 0;
@@ -30,7 +30,8 @@ public class kevinMonument : MonoBehaviour {
 			if (gameOverTimer > 0)
 				gameOverTimer -= Time.deltaTime;
 			else {
-				Destroy (gameObject);
+                Application.LoadLevel("gameOverScene");
+                Destroy (gameObject);
 			}
 		}
 	}
@@ -49,7 +50,9 @@ public class kevinMonument : MonoBehaviour {
 			myAnim.SetInteger ("level", 4);
 			gameOverTimer = GAME_OVER_MAX;
 			gameOver = true;
-		}
+            FindObjectOfType<bombSpawner>().GetComponent<AudioSource>().Stop();
+            FindObjectOfType<playerAttack>().playDeathSound();
+        }
 		FindObjectOfType<scrCameraShake> ().Shake (.5f);
 	}
 }
