@@ -165,6 +165,11 @@ public class playerAttack : MonoBehaviour {
         FindObjectOfType<bombSpawner>().GetComponent<AudioSource>().Stop();
         anim.SetBool("crumbling", true);
         GetComponent<CubeControl>().cantMove = true;
+        playDeathSound();
+    }
+
+    public void playDeathSound()
+    {
         source.PlayOneShot(deathSound, .5f);
     }
 }
