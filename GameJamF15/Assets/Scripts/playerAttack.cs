@@ -44,6 +44,7 @@ public class playerAttack : MonoBehaviour {
         kickSound = (AudioClip)Resources.Load("Kick");
         liftSound = (AudioClip)Resources.Load("Lift");
         deathSound = (AudioClip)Resources.Load("GameOver");
+        crumbleSound = (AudioClip)Resources.Load("Crumble");
 
     }
 	
@@ -171,6 +172,7 @@ public class playerAttack : MonoBehaviour {
 
     public void death() {
         FindObjectOfType<bombSpawner>().GetComponent<AudioSource>().Stop();
+        source.PlayOneShot(crumbleSound, 1f);
         anim.SetBool("crumbling", true);
         source.PlayOneShot(deathSound, .5f);
     }

@@ -14,10 +14,16 @@ public class kevinMonument : MonoBehaviour {
 	float gameOverTimer = 0;
 	const float LOSE_MAX = .5f;
 	float loseTimer = 0;
+    private AudioSource source;
+    AudioClip crumbleSound;
+    AudioClip gameOverSound;
 
 	// Use this for initialization
 	void Start () {
-		mySR = GetComponent<SpriteRenderer> ();
+        source = GetComponent<AudioSource>();
+        crumbleSound = (AudioClip)Resources.Load("Crumble");
+        gameOverSound = (AudioClip)Resources.Load("GameOver");
+        mySR = GetComponent<SpriteRenderer> ();
 		childSR = transform.GetChild(0).GetComponent<SpriteRenderer> ();
 		myAnim = GetComponent<Animator> ();
 		childAnim = transform.GetChild(0).GetComponent<Animator> ();
@@ -47,9 +53,17 @@ public class kevinMonument : MonoBehaviour {
 		}
 		if (damageTaken == 10) {
 			myAnim.SetInteger ("level", 4);
-			gameOverTimer = GAME_OVER_MAX;
-			gameOver = true;
-		}
+            source.PlayOneShot(crumbleSound, 1f);
+            source.PlayOneShot(gameOverSound, 1f);
+            gameOverTimer = GAME_OVER_MAX;
+            if (!gameOver)
+            {
+                source.PlayOneShot(gameOverSound, 1f);
+                gameOver = true;
+            }
+            else
+            { Application.LoadLevel("introScene"); }
+        }
 		FindObjectOfType<scrCameraShake> ().Shake (.5f);
 	}
 }
