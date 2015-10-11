@@ -19,11 +19,13 @@ public class playerAttack : MonoBehaviour {
 	float attackTimer = 0;
 	float attackIntroTimer = 0;
 	float attackCooldownTimer = 0;
+    float gameOver = 0;
 
     private AudioSource source;
     AudioClip kickSound;
     AudioClip liftSound;
-    AudioClip lifeSound;
+    AudioClip deathSound;
+    AudioClip crumbleSound;
 
     GameObject attack;
 	string attackType = ""; //kick, lift, overhead
@@ -41,7 +43,7 @@ public class playerAttack : MonoBehaviour {
 		anim = GetComponent<Animator> ();
         kickSound = (AudioClip)Resources.Load("Kick");
         liftSound = (AudioClip)Resources.Load("Lift");
-        lifeSound = (AudioClip)Resources.Load("GetLife");
+        deathSound = (AudioClip)Resources.Load("GameOver");
 
     }
 	
@@ -122,6 +124,16 @@ public class playerAttack : MonoBehaviour {
 			attackType = "";
 			anim.SetInteger("attackType", 0);
 		}
+        if (getHealth() <= 0)
+        {
+            if (gameOver < 1 )
+            {
+                death();
+                gameOver++;
+            }
+            else if(!source.isPlaying)
+            { Application.LoadLevel("introScene"); }
+        }
 	}
 
 	public bool isAttacking() {
@@ -155,5 +167,11 @@ public class playerAttack : MonoBehaviour {
         return (!isAttacking() || (isAttacking() && (getAttackType() == "overhead" ||
          !((transform.position.x > go.transform.position.x && GetComponent<CubeControl>().getLastDir() < 0) ||
          (transform.position.x < go.transform.position.x && GetComponent<CubeControl>().getLastDir() > 0)))));
+    }
+
+    public void death() {
+        FindObjectOfType<bombSpawner>().GetComponent<AudioSource>().Stop();
+        anim.SetBool("crumbling", true);
+        source.PlayOneShot(deathSound, .5f);
     }
 }
