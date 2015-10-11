@@ -24,8 +24,17 @@ public class getScoreScript : MonoBehaviour {
 
     public void resetScore()
     {
+        currentScore = 0;
+    }
+
+    public void calcHighScore()
+    {
         if (currentScore > highScore)
             highScore = currentScore;
-        currentScore = 0;
+    }
+
+    public float getHighScore()
+    {
+        return highScore;
     }
 }
